@@ -1,12 +1,54 @@
-**DESCRIPTION**
+# SoundManager
 
-_SongStorage_ is a tool which can store different songs in a pre-defined folder named "storage" and perform CRUD operations with metadata on PostgreSQL database tables. It comes also with a logger which executes asynchronously and stores all the events in the "logger" file.
+![Version](https://img.shields.io/badge/version-v1.0-blue)
+[![GitHub contributors](https://img.shields.io/github/contributors/HardChallenge/SoundManager)](https://github.com/HardChallenge/SoundManager/graphs/contributors)
+![Total Views](https://views.whatilearened.today/views/github/HardChallenge/SoundManager.svg)
+[![GitHub issues](https://img.shields.io/github/issues/HardChallenge/SoundManager)](https://github.com/HardChallenge/SoundManager/issues)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/HardChallenge/SoundManager/blob/main/LICENSE)
 
-Commands available: create, delete, update, search, archive, play
 
-**REQUIREMENTS**
+**Sound Manager** facilitates seamless storage, management, and metadata operations for audio files, enhanced by asynchronous logging for efficient monitoring.
+---
 
-*Side note*: The project was developed on python3.11.1 using:
+## Contents
+
+- [Introduction](#introduction)
+- [Functionalities](#functionalities)
+- [Requirements](#requirements)
+- [Technologies](#technologies)
+- [Setup Guide](#setup-guide)
+- [Usage](#usage)
+
+---
+
+## Introduction
+
+
+**Sound Manager** is an application designed for storing and managing audio files within a predefined directory named 'storage', while performing CRUD operations on metadata stored in PostgreSQL database tables. 
+
+Additionally, the application features an asynchronous logging system that records all events to the 'logger' file, ensuring efficient monitoring of operations. This platform enables users to upload, view, and manage collections of music tracks in an organized and user-friendly manner, making it ideal for music enthusiasts. 
+
+
+--- 
+
+## Functionalities
+
+- **Audio File Upload**: Users can easily upload audio files to the designated 'storage' directory for centralized storage.
+- **Metadata Management**: Provides CRUD operations for managing metadata associated with each audio file in a PostgreSQL database.
+- **Playback and Visualization**: Enables users to play uploaded audio files directly within the command line interface.
+- **Asynchronous Logging**: Logs all operations and events asynchronously to a 'logger' file, ensuring streamlined monitoring and tracking.
+
+---
+
+## Technologies
+
+- **Backend**: Python3, PostgreSQL, JSON
+
+---
+
+## Requirements
+
+The project was developed on python3.11.1 using:
 
     ffmpeg==1.4
     psycopg2==2.9.9
@@ -19,14 +61,14 @@ Commands available: create, delete, update, search, archive, play
 2. When starting **main.py**, an appsettings.json is required with the following syntax:
 ```json
 {
-    "storage": "string",
-    "logger": "string",
+    "storage": "file_path",
+    "logger": "file_path",
     "restart": true,
     "connection":{
-        "host": "string",
-        "user": "string",
-        "password": "string",
-        "database": "string"
+        "host": "database_host",
+        "user": "database_user",
+        "password": "database_password",
+        "database": "database_name"
     }
 }
 ```
@@ -35,7 +77,36 @@ Commands available: create, delete, update, search, archive, play
 *IMPORTANT: If restart is set on true, then all of storage's files will be erased, starting with an empty directory!*
 * If restart == false, tables will be created only if they don't exist
 
-3. Every command from this tool requires a path to a .json file in order to execute. It must follow the next syntax:
+---
+
+## Setup Guide
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/HardChallenge/SoundManager.git
+```
+
+2. Change the directory:
+
+```bash
+cd SoundManager
+```
+
+3. Execute the main script:
+```bash
+python3 main.py
+```
+
+4. Execute a command with the following syntax:
+
+    [command] [file_path]
+
+Commands available: CREATE, DELETE, UPDATE, SEARCH, PLAY, ARCHIVE
+
+---
+
+## Usage
 
 **CREATE => returns Song.id if created successfully, -1 otherwise**
 ```json
@@ -105,3 +176,4 @@ The json format is same as 'SEARCH'. You will be prompted to select the songs wh
 **SYNTAX: Option,Option,...  (where argument option can either be a song number from the list (1-indexed) or a interval in the form of NUMBER..NUMBER)**
 
 *IMPORTANT: The songs will be compressed and placed into a new archive in the storage folder.*
+
